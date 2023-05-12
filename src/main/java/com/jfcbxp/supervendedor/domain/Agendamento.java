@@ -1,6 +1,13 @@
 package com.jfcbxp.supervendedor.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -11,6 +18,8 @@ import java.time.LocalDate;
 
 @Data
 @Table(name = "AGENDAMENTO")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Agendamento implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -22,6 +31,9 @@ public class Agendamento implements Serializable {
     @Column("SITUACAO")
     private String situacao;
     @Column("DATA_AGENDAMENTO")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dataAgendamento;
     @Column("CODIGO_VENDEDOR")
     private String codigoVendedor;
