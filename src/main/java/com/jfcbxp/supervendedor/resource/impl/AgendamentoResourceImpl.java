@@ -1,6 +1,6 @@
 package com.jfcbxp.supervendedor.resource.impl;
 
-import com.jfcbxp.supervendedor.domain.Agendamento;
+import com.jfcbxp.supervendedor.dto.response.AgendamentoResponse;
 import com.jfcbxp.supervendedor.resource.AgendamentoResource;
 import com.jfcbxp.supervendedor.service.AgendamentoService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ public class AgendamentoResourceImpl implements AgendamentoResource {
     private final AgendamentoService service;
 
     @Override
-    public ResponseEntity<Flux<Agendamento>> buscarAgendamentos(String codigoVendedor) {
+    public ResponseEntity<Flux<AgendamentoResponse>> buscarAgendamentos(String codigoVendedor) {
         return ResponseEntity.ok(service.buscarAgendamentos(codigoVendedor)) ;
     }
 }
