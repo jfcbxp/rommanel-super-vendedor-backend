@@ -12,4 +12,7 @@ public interface LoginResource {
     @PostMapping(value = "/login")
     Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest authRequest);
 
+    @PostMapping(value = "/update")
+    Mono<ResponseEntity<AuthResponse>> update(@RequestBody AuthResponse token);
+
 }

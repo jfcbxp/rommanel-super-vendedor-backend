@@ -26,4 +26,9 @@ public class LoginResourceImpl implements LoginResource {
                 .map(userDetails -> ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails))))
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()));
     }
+
+    @Override
+    public Mono<ResponseEntity<AuthResponse>> update(AuthResponse authRequest) {
+        return Mono.just(ResponseEntity.ok(new AuthResponse(jwtUtil.updateToken(authRequest.getToken()))));
+    }
 }

@@ -68,6 +68,10 @@ public class JWTUtil {
                 .compact();
     }
 
+    public String updateToken(String token) {
+        return doGenerateToken(getAllClaimsFromToken(token),getAllClaimsFromToken(token).getSubject());
+    }
+
     public Boolean validateToken(String token) {
         return !isTokenExpired(token);
     }

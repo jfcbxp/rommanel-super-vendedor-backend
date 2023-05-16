@@ -10,4 +10,5 @@ import java.time.LocalDate;
 @Repository
 public interface AgendamentoRepository extends ReactiveCrudRepository<Agendamento,Integer> {
     Flux<Agendamento> findByCodigoVendedorAndDataAgendamento(String codigoVendedor, LocalDate dataAgendamento);
+
 }
