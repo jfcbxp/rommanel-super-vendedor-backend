@@ -21,10 +21,10 @@ public class UserServiceImpl implements UserService {
         @Override
     public Mono<UserSecurity> findByUserName(String username) {
 
-            return repository.findByUsername(username).map(user ->  UserSecurity.builder()
-                    .username(user.getUsername())
-                    .fullName(user.getUsername())
-                    .password(passwordEncoder.encode(user.getPassword()))
+            return repository.findByCodigo(username).map(user ->  UserSecurity.builder()
+                    .username(user.getCodigo())
+                    .fullName(user.getNomeReduzido())
+                    .password(passwordEncoder.encode(user.getSenha()))
                     .enabled(true)
                     .roles(Collections.singletonList(UserSecurityRole.ROLE_USER))
                     .build());

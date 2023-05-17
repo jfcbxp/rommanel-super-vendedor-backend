@@ -37,4 +37,5 @@ public class AgendamentoResponse implements Serializable {
     private String observacao;
     private String horaInicial;
     private String horaFinal;
+    private String telefone;
 }

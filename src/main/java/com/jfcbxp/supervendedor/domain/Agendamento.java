@@ -44,5 +44,7 @@ public class Agendamento implements Serializable {
     private String horaInicial;
     @Column("HORA_FINAL")
     private String horaFinal;
+    @Column("TELEFONE")
+    private String telefone;
 
 }

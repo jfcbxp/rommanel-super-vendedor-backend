@@ -11,7 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Data
-@Table(name = "USUARIOS_COMISSAO")
+@Table(name = "USUARIOS_SUPERVENDEDOR")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario implements Serializable {
@@ -20,15 +20,13 @@ public class Usuario implements Serializable {
     @Id
     @Column("REC")
     private Integer id;
-    @Column("USUARIO")
-    private String username;
+    @Column("CODIGO")
+    private String codigo;
     @Column("SENHA")
-    private String password;
-    @Column("CODIGO_VENDEDOR")
-    private String codigoVendedor;
-    @Column("GRUPO")
-    private String grupo;
-    @Column("FILIAIS")
-    private String filiais;
+    private String senha;
+    @Column("NOME")
+    private String nome;
+    @Column("NOME_REDUZIDO")
+    private String nomeReduzido;
 
 }

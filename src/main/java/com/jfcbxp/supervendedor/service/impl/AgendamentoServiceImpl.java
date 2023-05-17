@@ -32,18 +32,12 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 
     @Override
     public Flux<AgendamentoResponse> buscarAgendamentos(String codigoVendedor) {
-        var year = LocalDate.now().getYear();
-        var month = LocalDate.now().getMonth();
         var key = KEY_CACHE_AGENDAMENTO.concat(codigoVendedor);
         return getAgendamentoFromCache(key)
                 .switchIfEmpty(
-
-                        Flux.range(1, LocalDate.now().lengthOfMonth())
-                                .flatMap(day ->
-                                        repository
-                                                .findByCodigoVendedorAndDataAgendamento(codigoVendedor,LocalDate.of(year, month, day))
-                                                .flatMap(agendamento ->   updateAgendamentoCache(key,mapper.map(agendamento, AgendamentoResponse.class)))
-                                )
+                            repository
+                                    .findByCodigoVendedorAndDataAgendamento(codigoVendedor,LocalDate.now())
+                                    .flatMap(agendamento ->   updateAgendamentoCache(key,mapper.map(agendamento, AgendamentoResponse.class)))
                 );
 
     }
