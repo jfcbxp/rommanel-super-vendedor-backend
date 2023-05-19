@@ -84,8 +84,9 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     private Mono<AgendamentoResponse> updateAgendamentoCache(String key, AgendamentoResponse agendamento) {
         RMapReactive<Integer,AgendamentoResponse> mapReactive = redissonReactiveClient
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,AgendamentoResponse.class));
-        mapReactive.expire(Duration.ofHours(1L)).then().subscribe();
-        return mapReactive.fastPut(agendamento.getId(),agendamento).thenReturn(agendamento);
+        return mapReactive.fastPut(agendamento.getId(),agendamento).thenReturn(agendamento)
+                .doFinally(signalType -> mapReactive.expire(Duration.ofHours(1L)).subscribe());
+
     }
 
     private Mono<TotalizadorAgendamentoResponse> getTotalizadorFromCache(String key) {
@@ -98,8 +99,9 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     private Mono<TotalizadorAgendamentoResponse> updateTotalizadorCache(String key, TotalizadorAgendamentoResponse totalizador) {
         RMapReactive<Integer,TotalizadorAgendamentoResponse> mapReactive = redissonReactiveClient
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,TotalizadorAgendamentoResponse.class));
-        mapReactive.expire(Duration.ofHours(1L)).then().subscribe();
-        return mapReactive.fastPut(0,totalizador).thenReturn(totalizador);
+        return mapReactive.fastPut(0,totalizador)
+                .thenReturn(totalizador)
+                .doFinally(signalType -> mapReactive.expire(Duration.ofHours(1L)).subscribe());
     }
 
 
