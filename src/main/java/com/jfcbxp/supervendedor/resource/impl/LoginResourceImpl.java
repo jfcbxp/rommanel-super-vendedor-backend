@@ -21,7 +21,7 @@ public class LoginResourceImpl implements LoginResource {
     private final UserService userService;
     @Override
     public Mono<ResponseEntity<AuthResponse>> login(AuthRequest authRequest) {
-        return userService.findByUserName(authRequest.getUsername())
+        return userService.findByUserName(authRequest.getCode())
                 .filter(userDetails -> passwordEncoder.encode(authRequest.getPassword()).equals(userDetails.getPassword()))
                 .map(userDetails -> ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails))))
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()));

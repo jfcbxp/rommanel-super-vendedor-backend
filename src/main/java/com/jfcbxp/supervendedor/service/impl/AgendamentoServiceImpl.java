@@ -25,7 +25,6 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     public static final String KEY_CACHE_TOTALIZADOR_AGENDAMENTO_DIARIO = "agendamento:totalizador:diario:";
     public static final String KEY_CACHE_TOTALIZADOR_AGENDAMENTO_MENSAL = "agendamento:totalizador:mensal:";
     private final AgendamentoRepository repository;
-
     private final TotalizadorAgendamentoRepository totalizadorRepository;
     private final RedissonReactiveClient redissonReactiveClient;
     private final ModelMapper mapper;
