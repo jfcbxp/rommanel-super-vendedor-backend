@@ -7,6 +7,6 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface CarteiraRepository extends ReactiveCrudRepository<Carteira,Integer> {
-    Flux<Carteira> findByCodigoAndCodigoVendedor(String codigo,String codigoVendedor);
+    Flux<Carteira> findByCodigoAndCodigoVendedorOrderByNomeClienteAsc(String codigo,String codigoVendedor);
 
 }

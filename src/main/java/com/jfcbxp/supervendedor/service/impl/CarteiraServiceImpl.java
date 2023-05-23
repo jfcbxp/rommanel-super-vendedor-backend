@@ -32,7 +32,7 @@ public class CarteiraServiceImpl implements CarteiraService {
         return getCarteiraFromCache(key)
                 .switchIfEmpty(
                             repository
-                                    .findByCodigoAndCodigoVendedor(codigo,codigoVendedor)
+                                    .findByCodigoAndCodigoVendedorOrderByNomeClienteAsc(codigo,codigoVendedor)
                                     .flatMap(carteira ->   updateCarteiraCache(key,mapper.map(carteira, CarteiraResponse.class)))
                 );
 

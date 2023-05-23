@@ -1,5 +1,6 @@
 package com.jfcbxp.supervendedor.resource.impl;
 
+import com.jfcbxp.supervendedor.dto.response.FaturamentoProgressResponse;
 import com.jfcbxp.supervendedor.dto.response.FaturamentoResponse;
 import com.jfcbxp.supervendedor.resource.FaturamentoResource;
 import com.jfcbxp.supervendedor.service.FaturamentoService;
@@ -19,7 +20,12 @@ public class FaturamentoResourceImpl implements FaturamentoResource {
 
     @Override
     public ResponseEntity<Flux<FaturamentoResponse>> buscarFaturamento(String codigoVendedor,LocalDate emissao) {
-        return ResponseEntity.ok(service.buscarfaturamento(codigoVendedor,emissao)) ;
+        return ResponseEntity.ok(service.buscarFaturamento(codigoVendedor,emissao)) ;
+    }
+
+    @Override
+    public ResponseEntity<Flux<FaturamentoProgressResponse>> buscarProgresso(String codigoVendedor) {
+        return ResponseEntity.ok(service.buscarProgresso(codigoVendedor)) ;
     }
 
 }

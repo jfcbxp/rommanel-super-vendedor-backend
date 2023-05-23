@@ -1,5 +1,6 @@
 package com.jfcbxp.supervendedor.resource;
 
+import com.jfcbxp.supervendedor.dto.response.FaturamentoProgressResponse;
 import com.jfcbxp.supervendedor.dto.response.FaturamentoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,5 +13,8 @@ public interface FaturamentoResource {
 
     @GetMapping(value = "/{codigoVendedor}/{emissao}")
     ResponseEntity<Flux<FaturamentoResponse>> buscarFaturamento(@PathVariable String codigoVendedor,@PathVariable LocalDate emissao);
+
+    @GetMapping(value = "/progresso/{codigoVendedor}")
+    ResponseEntity<Flux<FaturamentoProgressResponse>> buscarProgresso(@PathVariable String codigoVendedor);
 
 }
