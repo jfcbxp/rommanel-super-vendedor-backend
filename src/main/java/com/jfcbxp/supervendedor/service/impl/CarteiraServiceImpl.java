@@ -19,8 +19,8 @@ import java.time.Duration;
 @Service
 @RequiredArgsConstructor
 public class CarteiraServiceImpl implements CarteiraService {
-    public static final String KEY_CACHE_CARTEIRA = "carteira:";
-    public static final String KEY_CACHE_TOTALIZADOR_CARTEIRA = "carteira:totalizador:";
+    private static final String KEY_CACHE_CARTEIRA = "carteira:";
+    private static final String KEY_CACHE_TOTALIZADOR_CARTEIRA = "carteira:totalizador:";
     private final CarteiraRepository repository;
     private final TotalizadorCarteiraRepository totalizadorRepository;
     private final RedissonReactiveClient redissonReactiveClient;
