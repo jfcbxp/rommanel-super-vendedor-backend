@@ -43,7 +43,12 @@ public class FaturamentoServiceImpl implements FaturamentoService {
         var key = KEY_CACHE_FATURAMENTO_PROGRESSO.concat(codigoVendedor);
       return getFaturamentoProgressoFromCache(key)
                 .switchIfEmpty(
-                        getFaturamentoProgressoFromSource(key,codigoVendedor)
+                        getFaturamentoProgressoFromSource(key,codigoVendedor).map(
+                                progresso -> {
+                                    progresso.setSelected(progresso.getPeriodo().isEqual(LocalDate.now()));
+                                    return progresso;
+                                }
+                        )
                 );
     }
 
@@ -54,8 +59,8 @@ public class FaturamentoServiceImpl implements FaturamentoService {
         RMapReactive<Integer,FaturamentoResponse> mapReactive = redissonReactiveClient
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,FaturamentoResponse.class));
         return mapReactive.readAllValues().flux()
-                .filter(agendamentos -> !agendamentos.isEmpty())
-                .flatMap(agendamentos -> Flux.fromStream(agendamentos.stream()));
+                .filter(faturamento -> !faturamento.isEmpty())
+                .flatMap(faturamento -> Flux.fromStream(faturamento.stream()));
     }
 
 
@@ -74,7 +79,7 @@ public class FaturamentoServiceImpl implements FaturamentoService {
                 .contarByCodigoVendedorAndEmissao(codigoVendedor,
                         LocalDate.of(year, month, 1),
                         LocalDate.of(year, month, LocalDate.now().getDayOfMonth()))
-                .flatMap(faturamento ->   updateFaturamentoProgressoCache(key,faturamento));
+                .flatMap(faturamento -> updateFaturamentoProgressoCache(key,faturamento));
 
     }
 
@@ -83,15 +88,15 @@ public class FaturamentoServiceImpl implements FaturamentoService {
         RMapReactive<Integer,FaturamentoProgressResponse> mapReactive = redissonReactiveClient
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,FaturamentoProgressResponse.class));
         return mapReactive.readAllValues().flux()
-                .filter(agendamentos -> !agendamentos.isEmpty())
-                .flatMap(agendamentos -> Flux.fromStream(agendamentos.stream()));
+                .filter(faturamento -> !faturamento.isEmpty())
+                .flatMap(faturamento -> Flux.fromStream(faturamento.stream()));
     }
 
 
     private Mono<FaturamentoProgressResponse> updateFaturamentoProgressoCache(String key, FaturamentoProgressResponse faturamento) {
         RMapReactive<Integer,FaturamentoProgressResponse> mapReactive = redissonReactiveClient
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,FaturamentoProgressResponse.class));
-        return mapReactive.fastPut(faturamento.getDia().getDayOfMonth(),faturamento).thenReturn(faturamento)
+        return mapReactive.fastPut(faturamento.getPeriodo().getDayOfMonth(),faturamento).thenReturn(faturamento)
                 .doFinally(signalType -> mapReactive.expire(Duration.ofHours(1L)).subscribe());
 
     }

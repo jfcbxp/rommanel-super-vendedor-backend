@@ -21,11 +21,11 @@ import java.time.LocalDate;
 public class FaturamentoProgressResponse implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    @JsonFormat(pattern = "dd")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private LocalDate dia;
+    private LocalDate periodo;
     private Integer total;
-
+    private boolean selected;
 
 }
