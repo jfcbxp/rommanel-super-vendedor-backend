@@ -2,6 +2,7 @@ package com.jfcbxp.supervendedor.resource.impl;
 
 import com.jfcbxp.supervendedor.dto.response.FaturamentoProgressResponse;
 import com.jfcbxp.supervendedor.dto.response.FaturamentoResponse;
+import com.jfcbxp.supervendedor.dto.response.TotalizadorFaturamentoResponse;
 import com.jfcbxp.supervendedor.resource.FaturamentoResource;
 import com.jfcbxp.supervendedor.service.FaturamentoService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
@@ -26,6 +28,16 @@ public class FaturamentoResourceImpl implements FaturamentoResource {
     @Override
     public ResponseEntity<Flux<FaturamentoProgressResponse>> buscarProgresso(String codigoVendedor) {
         return ResponseEntity.ok(service.buscarProgresso(codigoVendedor)) ;
+    }
+
+    @Override
+    public ResponseEntity<Mono<TotalizadorFaturamentoResponse>> buscarTotalizadorDiario(String codigoVendedor,LocalDate emissao) {
+        return ResponseEntity.ok(service.buscarTotalizadorDiario(codigoVendedor,emissao)) ;
+    }
+
+    @Override
+    public ResponseEntity<Mono<TotalizadorFaturamentoResponse>> buscarTotalizadorMensal(String codigoVendedor) {
+        return ResponseEntity.ok(service.buscarTotalizadorMensal(codigoVendedor)) ;
     }
 
 }
