@@ -14,6 +14,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Data
 @AllArgsConstructor
@@ -38,4 +39,21 @@ public class MetaResponse implements Serializable {
     private Integer dias;
     private BigDecimal metaValor;
     private BigDecimal metaProspecto;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate dataAtualizacao;
+    private String horaAtualizacao;
+    private Integer quantidadeProspectos;
+    private BigDecimal ticketMedio;
+    private Integer quantidadeVendas;
+    private BigDecimal totalVendido;
+    private Integer quantidadeDevolvido;
+    private BigDecimal totalDevolvido;
+
+    public long getProgressoPeriodo(){
+        long totalDays = ChronoUnit.DAYS.between( dataInicial , dataFinal ) ;
+        long elapsedDays = ChronoUnit.DAYS.between( dataInicial , LocalDate.now() ) ;
+        return  ( elapsedDays * 100 ) / totalDays ;
+    }
 }

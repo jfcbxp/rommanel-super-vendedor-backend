@@ -40,4 +40,20 @@ public class Meta implements Serializable {
     private BigDecimal metaValor;
     @Column("META_PROSPECTO")
     private BigDecimal metaProspecto;
+    @Column("DATA_ATUALIZACAO")
+    private LocalDate dataAtualizacao;
+    @Column("HORA_ATUALIZACAO")
+    private String horaAtualizacao;
+    @Column("QUANTIDADE_PROSPECTOS")
+    private Integer quantidadeProspectos;
+    @Column("TICKET_MEDIO")
+    private BigDecimal ticketMedio;
+    @Column("QUANTIDADE_VENDAS")
+    private Integer quantidadeVendas;
+    @Column("VALOR_VENDIDO")
+    private BigDecimal totalVendido;
+    @Column("QUANTIDADE_DEVOLVIDO")
+    private Integer quantidadeDevolvido;
+    @Column("VALOR_DEVOLVIDO")
+    private BigDecimal totalDevolvido;
 }
