@@ -46,6 +46,8 @@ public class Meta implements Serializable {
     private String horaAtualizacao;
     @Column("QUANTIDADE_PROSPECTOS")
     private Integer quantidadeProspectos;
+    @Column("QUANTIDADE_REATIVOS")
+    private Integer quantidadeReativos;
     @Column("TICKET_MEDIO")
     private BigDecimal ticketMedio;
     @Column("QUANTIDADE_VENDAS")

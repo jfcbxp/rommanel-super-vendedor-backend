@@ -45,6 +45,7 @@ public class MetaResponse implements Serializable {
     private LocalDate dataAtualizacao;
     private String horaAtualizacao;
     private Integer quantidadeProspectos;
+    private Integer quantidadeReativos;
     private BigDecimal ticketMedio;
     private Integer quantidadeVendas;
     private BigDecimal totalVendido;
