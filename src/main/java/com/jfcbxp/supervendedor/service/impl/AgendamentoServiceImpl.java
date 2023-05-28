@@ -35,7 +35,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
         return getAgendamentoFromCache(key)
                 .switchIfEmpty(
                             repository
-                                    .findByCodigoVendedorAndDataAgendamento(codigoVendedor,LocalDate.now())
+                                    .findByCodigoVendedorAndDataAgendamentoOrderByHoraInicial(codigoVendedor,LocalDate.now())
                                     .flatMap(agendamento ->   updateAgendamentoCache(key,mapper.map(agendamento, AgendamentoResponse.class)))
                 );
 
