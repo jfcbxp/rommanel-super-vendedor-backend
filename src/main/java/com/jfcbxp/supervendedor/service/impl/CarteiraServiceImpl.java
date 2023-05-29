@@ -15,6 +15,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.Comparator;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +58,8 @@ public class CarteiraServiceImpl implements CarteiraService {
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,CarteiraResponse.class));
         return mapReactive.readAllValues().flux()
                 .filter(carteira -> !carteira.isEmpty())
-                .flatMap(carteira -> Flux.fromStream(carteira.stream()));
+                .flatMap(carteira -> Flux.fromStream(carteira.stream()))
+                .sort(Comparator.comparing(CarteiraResponse::getNomeCliente));
     }
 
 

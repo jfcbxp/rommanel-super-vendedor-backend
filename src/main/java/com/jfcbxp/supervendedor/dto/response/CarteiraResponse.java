@@ -37,4 +37,8 @@ public class CarteiraResponse implements Serializable {
     private String telefone;
     private String ultimoCodigoVendedor;
     private String ultimaEmpresa;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate ultimaCompra;
 }

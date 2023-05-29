@@ -45,5 +45,6 @@ public class Carteira implements Serializable {
     private String ultimoCodigoVendedor;
     @Column("ULTIMA_FILIAL")
     private String ultimaEmpresa;
-
+    @Column("ULTIMA_COMPRA")
+    private LocalDate ultimaCompra;
 }

@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Comparator;
 
 @Service
 @RequiredArgsConstructor
@@ -76,7 +77,8 @@ public class AgendamentoServiceImpl implements AgendamentoService {
                 .getMap(key, new TypedJsonJacksonCodec(Integer.class,AgendamentoResponse.class));
         return mapReactive.readAllValues().flux()
                 .filter(agendamentos -> !agendamentos.isEmpty())
-                .flatMap(agendamentos -> Flux.fromStream(agendamentos.stream()));
+                .flatMap(agendamentos -> Flux.fromStream(agendamentos.stream()))
+                .sort(Comparator.comparing(AgendamentoResponse::getHoraInicial));
     }
 
 
