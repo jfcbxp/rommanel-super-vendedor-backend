@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Objects;
 
 @Service
@@ -111,7 +112,8 @@ public class FaturamentoServiceImpl implements FaturamentoService {
                 .contarByCodigoVendedorAndEmissao(codigoVendedor,
                         LocalDate.of(year, month, 1),
                         LocalDate.of(year, month, LocalDate.now().getDayOfMonth()))
-                .flatMap(faturamento -> updateFaturamentoProgressoCache(key,faturamento));
+                .flatMap(faturamento -> updateFaturamentoProgressoCache(key,faturamento))
+                .sort(Comparator.comparing(FaturamentoProgressResponse::getPeriodo));
 
     }
 
