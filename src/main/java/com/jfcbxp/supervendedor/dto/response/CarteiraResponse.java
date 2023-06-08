@@ -41,4 +41,8 @@ public class CarteiraResponse implements Serializable {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate ultimaCompra;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate nascimento;
 }

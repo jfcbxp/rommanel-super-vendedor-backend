@@ -2,10 +2,10 @@ package com.jfcbxp.supervendedor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import reactivefeign.spring.config.EnableReactiveFeignClients;
 
 @SpringBootApplication
-@EnableScheduling
+@EnableReactiveFeignClients(basePackages = "com.jfcbxp.supervendedor.client")
 public class SupervendedorApplication {
 
 	public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package com.jfcbxp.supervendedor.service.impl;
 
+import com.jfcbxp.supervendedor.client.AgendamentoClient;
+import com.jfcbxp.supervendedor.dto.request.AgendamentoRequest;
 import com.jfcbxp.supervendedor.dto.response.AgendamentoResponse;
 import com.jfcbxp.supervendedor.dto.response.TotalizadorAgendamentoResponse;
 import com.jfcbxp.supervendedor.repository.AgendamentoRepository;
@@ -29,6 +31,7 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     private final TotalizadorAgendamentoRepository totalizadorRepository;
     private final RedissonReactiveClient redissonReactiveClient;
     private final ModelMapper mapper;
+    private final AgendamentoClient client;
 
     @Override
     public Flux<AgendamentoResponse> buscarAgendamentos(String codigoVendedor) {
@@ -70,6 +73,21 @@ public class AgendamentoServiceImpl implements AgendamentoService {
                 );
     }
 
+    @Override
+    public Mono<Void> atualizar(AgendamentoRequest agendamento) {
+        return client.atualizar(agendamento)
+                .doFinally(signalType -> clearCache(agendamento.getCodigoVendedor()).subscribe());
+    }
+
+
+    private Mono<Void> clearCache(String codigoVendedor){
+        return Mono.zip(
+                redissonReactiveClient.getMap(KEY_CACHE_AGENDAMENTO.concat(codigoVendedor)).delete(),
+        redissonReactiveClient.getMap(KEY_CACHE_TOTALIZADOR_AGENDAMENTO_DIARIO.concat(codigoVendedor)).delete(),
+        redissonReactiveClient.getMap(KEY_CACHE_TOTALIZADOR_AGENDAMENTO_MENSAL.concat(codigoVendedor)).delete()
+        ).then();
+
+    }
 
     private Flux<AgendamentoResponse> getAgendamentoFromCache(String key) {
 

@@ -1,10 +1,13 @@
 package com.jfcbxp.supervendedor.resource;
 
+import com.jfcbxp.supervendedor.dto.request.AgendamentoRequest;
 import com.jfcbxp.supervendedor.dto.response.AgendamentoResponse;
 import com.jfcbxp.supervendedor.dto.response.TotalizadorAgendamentoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -16,5 +19,8 @@ public interface AgendamentoResource {
     ResponseEntity<Mono<TotalizadorAgendamentoResponse>> buscarTotalizadorDiario(@PathVariable String codigoVendedor);
     @GetMapping(value = "/totalizador/mensal/{codigoVendedor}")
     ResponseEntity<Mono<TotalizadorAgendamentoResponse>> buscarTotalizadorMensal(@PathVariable String codigoVendedor);
+    @PutMapping
+    ResponseEntity<Mono<Void>> atualizar(@RequestBody AgendamentoRequest agendamento);
+
 
 }

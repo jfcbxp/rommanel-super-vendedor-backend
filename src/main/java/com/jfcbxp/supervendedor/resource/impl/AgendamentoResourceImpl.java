@@ -1,5 +1,6 @@
 package com.jfcbxp.supervendedor.resource.impl;
 
+import com.jfcbxp.supervendedor.dto.request.AgendamentoRequest;
 import com.jfcbxp.supervendedor.dto.response.AgendamentoResponse;
 import com.jfcbxp.supervendedor.dto.response.TotalizadorAgendamentoResponse;
 import com.jfcbxp.supervendedor.resource.AgendamentoResource;
@@ -30,5 +31,10 @@ public class AgendamentoResourceImpl implements AgendamentoResource {
     @Override
     public ResponseEntity<Mono<TotalizadorAgendamentoResponse>> buscarTotalizadorMensal(String codigoVendedor) {
         return ResponseEntity.ok(service.buscarTotalizadorMensal(codigoVendedor)) ;
+    }
+
+    @Override
+    public ResponseEntity<Mono<Void>> atualizar(AgendamentoRequest agendamento) {
+        return ResponseEntity.ok(service.atualizar(agendamento)) ;
     }
 }
