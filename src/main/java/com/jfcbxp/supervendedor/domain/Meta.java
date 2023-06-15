@@ -52,6 +52,8 @@ public class Meta implements Serializable {
     private BigDecimal ticketMedio;
     @Column("QUANTIDADE_VENDAS")
     private Integer quantidadeVendas;
+    @Column("QUANTIDADE_ITENS")
+    private Integer quantidadeItens;
     @Column("VALOR_VENDIDO")
     private BigDecimal totalVendido;
     @Column("QUANTIDADE_DEVOLVIDO")

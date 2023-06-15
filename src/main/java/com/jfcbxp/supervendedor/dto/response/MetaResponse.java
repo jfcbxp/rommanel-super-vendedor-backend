@@ -48,6 +48,7 @@ public class MetaResponse implements Serializable {
     private Integer quantidadeReativos;
     private BigDecimal ticketMedio;
     private Integer quantidadeVendas;
+    private Integer quantidadeItens;
     private BigDecimal totalVendido;
     private Integer quantidadeDevolvido;
     private BigDecimal totalDevolvido;
