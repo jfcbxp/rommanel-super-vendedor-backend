@@ -4,8 +4,10 @@ import com.jfcbxp.supervendedor.dto.request.AgendamentoRequest;
 import com.jfcbxp.supervendedor.dto.response.AgendamentoResponse;
 import com.jfcbxp.supervendedor.dto.response.TotalizadorAgendamentoResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import reactor.core.publisher.Flux;
@@ -21,6 +23,8 @@ public interface AgendamentoResource {
     ResponseEntity<Mono<TotalizadorAgendamentoResponse>> buscarTotalizadorMensal(@PathVariable String codigoVendedor);
     @PutMapping
     ResponseEntity<Mono<Void>> atualizar(@RequestBody AgendamentoRequest agendamento);
-
-
+    @PostMapping
+    ResponseEntity<Mono<Void>> cadastrar(@RequestBody AgendamentoRequest agendamento);
+    @DeleteMapping
+    ResponseEntity<Mono<Void>> deletar(@RequestBody AgendamentoRequest agendamento);
 }

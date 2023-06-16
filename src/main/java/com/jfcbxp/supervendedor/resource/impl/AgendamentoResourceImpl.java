@@ -20,21 +20,31 @@ public class AgendamentoResourceImpl implements AgendamentoResource {
 
     @Override
     public ResponseEntity<Flux<AgendamentoResponse>> buscarAgendamentos(String codigoVendedor) {
-        return ResponseEntity.ok(service.buscarAgendamentos(codigoVendedor)) ;
+        return ResponseEntity.ok(service.buscarAgendamentos(codigoVendedor));
     }
 
     @Override
     public ResponseEntity<Mono<TotalizadorAgendamentoResponse>> buscarTotalizadorDiario(String codigoVendedor) {
-        return ResponseEntity.ok(service.buscarTotalizadorDiario(codigoVendedor)) ;
+        return ResponseEntity.ok(service.buscarTotalizadorDiario(codigoVendedor));
     }
 
     @Override
     public ResponseEntity<Mono<TotalizadorAgendamentoResponse>> buscarTotalizadorMensal(String codigoVendedor) {
-        return ResponseEntity.ok(service.buscarTotalizadorMensal(codigoVendedor)) ;
+        return ResponseEntity.ok(service.buscarTotalizadorMensal(codigoVendedor));
     }
 
     @Override
     public ResponseEntity<Mono<Void>> atualizar(AgendamentoRequest agendamento) {
-        return ResponseEntity.ok(service.atualizar(agendamento)) ;
+        return ResponseEntity.ok(service.atualizar(agendamento));
+    }
+
+    @Override
+    public ResponseEntity<Mono<Void>> cadastrar(AgendamentoRequest agendamento) {
+        return ResponseEntity.ok(service.cadastrar(agendamento));
+    }
+
+    @Override
+    public ResponseEntity<Mono<Void>> deletar(AgendamentoRequest agendamento) {
+        return ResponseEntity.ok(service.deletar(agendamento));
     }
 }

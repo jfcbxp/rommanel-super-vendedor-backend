@@ -15,4 +15,8 @@ public interface AgendamentoService {
     Mono<TotalizadorAgendamentoResponse> buscarTotalizadorMensal(String codigoVendedor);
 
     Mono<Void> atualizar(AgendamentoRequest agendamento);
+
+    Mono<Void> cadastrar(AgendamentoRequest agendamento);
+
+    Mono<Void> deletar(AgendamentoRequest agendamento);
 }

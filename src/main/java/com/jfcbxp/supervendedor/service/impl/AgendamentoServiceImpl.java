@@ -79,6 +79,18 @@ public class AgendamentoServiceImpl implements AgendamentoService {
                 .doFinally(signalType -> clearCache(agendamento.getCodigoVendedor()).subscribe());
     }
 
+    @Override
+    public Mono<Void> cadastrar(AgendamentoRequest agendamento) {
+        return client.cadastrar(agendamento)
+                .doFinally(signalType -> clearCache(agendamento.getCodigoVendedor()).subscribe());
+    }
+
+    @Override
+    public Mono<Void> deletar(AgendamentoRequest agendamento) {
+        return client.deletar(agendamento)
+                .doFinally(signalType -> clearCache(agendamento.getCodigoVendedor()).subscribe());
+    }
+
 
     private Mono<Void> clearCache(String codigoVendedor){
         return Mono.zip(
