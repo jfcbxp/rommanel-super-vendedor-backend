@@ -44,7 +44,7 @@ public class AgendamentoResourceImpl implements AgendamentoResource {
     }
 
     @Override
-    public ResponseEntity<Mono<Void>> deletar(AgendamentoRequest agendamento) {
-        return ResponseEntity.ok(service.deletar(agendamento));
+    public ResponseEntity<Mono<Void>> deletar(String codigoVendedor, Integer id) {
+        return ResponseEntity.ok(service.deletar(codigoVendedor,id));
     }
 }

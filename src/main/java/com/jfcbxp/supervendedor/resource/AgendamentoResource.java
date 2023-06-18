@@ -25,6 +25,6 @@ public interface AgendamentoResource {
     ResponseEntity<Mono<Void>> atualizar(@RequestBody AgendamentoRequest agendamento);
     @PostMapping
     ResponseEntity<Mono<Void>> cadastrar(@RequestBody AgendamentoRequest agendamento);
-    @DeleteMapping
-    ResponseEntity<Mono<Void>> deletar(@RequestBody AgendamentoRequest agendamento);
+    @DeleteMapping(value = "/{codigoVendedor}/{id}")
+    ResponseEntity<Mono<Void>> deletar(@PathVariable String codigoVendedor,@PathVariable Integer id);
 }

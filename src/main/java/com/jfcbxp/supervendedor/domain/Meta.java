@@ -40,6 +40,8 @@ public class Meta implements Serializable {
     private BigDecimal metaValor;
     @Column("META_PROSPECTO")
     private BigDecimal metaProspecto;
+    @Column("META_QTD_PECAS")
+    private BigDecimal metaQuantidadePecas;
     @Column("DATA_ATUALIZACAO")
     private LocalDate dataAtualizacao;
     @Column("HORA_ATUALIZACAO")
@@ -60,4 +62,12 @@ public class Meta implements Serializable {
     private Integer quantidadeDevolvido;
     @Column("VALOR_DEVOLVIDO")
     private BigDecimal totalDevolvido;
+    @Column("VALOR_COMISSAO")
+    private BigDecimal totalComissao;
+    @Column("QTD_CARTEIRA")
+    private Integer quantidadeCarteira;
+    @Column("QTD_CLIENTES")
+    private Integer quantidadeClientes;
+    @Column("ATENDIMENTO_PERCENTUAL")
+    private BigDecimal atendimentoPercentual;
 }

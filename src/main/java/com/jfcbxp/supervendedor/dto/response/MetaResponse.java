@@ -39,6 +39,7 @@ public class MetaResponse implements Serializable {
     private Integer dias;
     private BigDecimal metaValor;
     private BigDecimal metaProspecto;
+    private BigDecimal metaQuantidadePecas;
     @JsonFormat(pattern = "dd/MM/yyyy")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -52,6 +53,10 @@ public class MetaResponse implements Serializable {
     private BigDecimal totalVendido;
     private Integer quantidadeDevolvido;
     private BigDecimal totalDevolvido;
+    private BigDecimal totalComissao;
+    private Integer quantidadeCarteira;
+    private Integer quantidadeClientes;
+    private BigDecimal atendimentoPercentual;
 
     public long getProgressoPeriodo(){
         long totalDays = ChronoUnit.DAYS.between( dataInicial , dataFinal ) ;
