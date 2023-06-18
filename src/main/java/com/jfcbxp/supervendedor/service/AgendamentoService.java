@@ -18,5 +18,5 @@ public interface AgendamentoService {
 
     Mono<Void> cadastrar(AgendamentoRequest agendamento);
 
-    Mono<Void> deletar(AgendamentoRequest agendamento);
+    Mono<Void> deletar(String codigoVendedor, Integer id);
 }
