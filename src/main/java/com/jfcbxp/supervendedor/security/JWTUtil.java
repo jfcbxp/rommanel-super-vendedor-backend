@@ -9,7 +9,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,16 +23,16 @@ public class JWTUtil {
     @Value("${springbootwebfluxjjwt.jjwt.expiration}")
     private String expirationTime;
 
-    private Key key;
+    private SecretKey secretKey;
 
     @PostConstruct
     public void init() {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public Claims getAllClaimsFromToken(String token) {
         try {
-            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+            return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
         }catch ( ExpiredJwtException ex ) {
             return ex.getClaims();
 
@@ -66,11 +66,11 @@ public class JWTUtil {
         final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong * 1000);
 
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(username)
-                .setIssuedAt(createdDate)
-                .setExpiration(expirationDate)
-                .signWith(key)
+                .claims(claims)
+                .subject(username)
+                .issuedAt(createdDate)
+                .expiration(expirationDate)
+                .signWith(secretKey)
                 .compact();
     }
 

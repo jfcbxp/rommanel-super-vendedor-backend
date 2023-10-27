@@ -5,16 +5,17 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.0.12</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.jfcbxp</groupId>
 	<artifactId>supervendedor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>supervendedor</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Backend app super vendedor</description>
 	<properties>
 		<java.version>17</java.version>
+		<snakeyaml.version>2.2</snakeyaml.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -28,39 +29,45 @@
 		<dependency>
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson-spring-boot-starter</artifactId>
-			<version>3.21.0</version>
+			<version>3.24.3</version>
 		</dependency>
 		<dependency>
 			<groupId>io.r2dbc</groupId>
 			<artifactId>r2dbc-mssql</artifactId>
-			<version>1.0.0.RELEASE</version>
+			<version>1.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>3.1.1</version>
+			<version>3.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
-			<version>0.11.5</version>
+			<version>0.12.3</version>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
-			<version>0.11.5</version>
+			<version>0.12.3</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-orgjson</artifactId>
-			<version>0.11.5</version>
+			<version>0.12.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.playtika.reactivefeign</groupId>
 			<artifactId>feign-reactor-spring-cloud-starter</artifactId>
 			<version>4.0.0</version>
 			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-fileupload</groupId>
+					<artifactId>commons-fileupload</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
