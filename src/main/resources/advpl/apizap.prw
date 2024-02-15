@@ -62,6 +62,37 @@ WSMETHOD PUT UPDAGE WSSERVICE APIZAP
 		EndCase
 		_cSql := " UPDATE "+RETSQLNAME("ZAP")+" SET ZAP_OBS = '"+_cObs+"',ZAP_SITUA = '"+_cSitua+"' WHERE R_E_C_N_O_ = "+cValToChar(oJson['id'])
 		TCSQLEXEC(_cSql)
+
+		IF _cSitua == "2" .AND. !EMPTY(ALLTRIM(oJson['dataAgendamento'])) .AND. !EMPTY(ALLTRIM(oJson['horaInicial']))
+
+			ZAP->(dbGoTo(oJson['id']))
+
+			_cFi   := ZAP->ZAP_FILIAL
+			_cCod  := ZAP->ZAP_CODIGO
+			_cVend := ZAP->ZAP_VEND
+			_cCli  := ZAP->ZAP_CLIENT
+			_cLoj  := ZAP->ZAP_LOJA
+			_cNome := ZAP->ZAP_NOME
+			_nValo := ZAP->ZAP_VALOR
+
+			Reclock("ZAP",.T.)
+				ZAP->ZAP_FILIAL    :=  _cFi
+				ZAP->ZAP_CODIGO    :=  _cCod
+				ZAP->ZAP_VEND      :=  _cVend
+				ZAP->ZAP_DATA      :=  CTOD(oJson['dataAgendamento'])
+				ZAP->ZAP_HORAI     :=  PadR(FWNoAccent(ALLTRIM(oJson['horaInicial'])),TamSX3("ZAP_HORAI")[1])
+				ZAP->ZAP_HORAF     :=  PadR(FWNoAccent(ALLTRIM(oJson['horaFinal'])),TamSX3("ZAP_HORAF")[1])
+				ZAP->ZAP_CLIENT    :=  _cCli
+				ZAP->ZAP_LOJA      :=  _cLoj
+				ZAP->ZAP_NOME      :=  _cNome
+				ZAP->ZAP_SITUA     :=  "1"
+				ZAP->ZAP_VALOR     :=  _nValo
+				ZAP->ZAP_OBS       := _cObs
+			ZAP->(MsUnLock())
+
+
+		ENDIF
+
 		::SetResponse(oJson:toJSON())
 
 	ENDIF
