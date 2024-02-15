@@ -23,21 +23,25 @@ public class WebSecurityConfig {
     @Bean
     public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
         return http
-                .exceptionHandling()
-                .authenticationEntryPoint((swe, e) ->
-                        Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED))
-                ).accessDeniedHandler((swe, e) ->
-                        Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))
-                ).and()
-                .csrf().disable()
-                .formLogin().disable()
-                .httpBasic().disable()
+                .exceptionHandling(exception -> {
+                            exception.authenticationEntryPoint((swe, e) ->
+                                    Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED))
+                            )
+                        .accessDeniedHandler((swe, e) ->
+                                    Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))
+                        );
+                }
+                )
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
-                .authorizeExchange()
-                .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers("/login","/update").permitAll()
-                .anyExchange().authenticated()
-                .and().build();
+                .authorizeExchange(authorize -> {
+                    authorize.pathMatchers(HttpMethod.OPTIONS).permitAll();
+                    authorize.pathMatchers("/login","/update").permitAll();
+                    authorize.anyExchange().authenticated();
+                })
+                .build();
     }
 }
