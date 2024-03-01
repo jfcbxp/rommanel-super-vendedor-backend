@@ -4,13 +4,10 @@ SELECT ZAO_CODIGO AS CODIGO,ZAO_FILIAL AS EMPRESA,ZAO_VEND AS CODIGO_VENDEDOR,ZA
 CASE A1_SITUA1
 WHEN '1' THEN 'Ativo'
 WHEN '2' THEN 'Bloqueado media de vendas'
-WHEN '3' THEN 'Bloqueado 90 dias sem compras'
-WHEN '4' THEN 'Bloqueado 150 dias sem compras'
-WHEN '5' THEN 'Pre Inativo 1 60 dias sem compras'
-WHEN '6' THEN 'Pre Inativo 2 70 dias sem compras'
-WHEN '7' THEN 'Pre Inativo 3 80 dias sem compras'
-WHEN '8' THEN '365 dias sem compras'
-WHEN '9' THEN '730 dias sem compras'
+WHEN '3' THEN '90 dias sem compras'
+WHEN '4' THEN '30 dias sem compras'
+WHEN '5' THEN '60 dias sem compras'
+WHEN '6' THEN 'Inativo'
 WHEN '0' THEN 'Bloqueado sem compras'
 END
 AS SITUACAO,
